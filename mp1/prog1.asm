@@ -1,7 +1,7 @@
 ;
 ; The code given to you here implements the histogram calculation that 
 ; we developed in class.  In programming lab, we will add code that
-; prints a number in hexadecimal to the monitor.
+; prints a number in hexadecimal to the monitor.(check)
 ;
 ; Your assignment for this program is to combine these two pieces of 
 ; code to print the histogram to the monitor.
