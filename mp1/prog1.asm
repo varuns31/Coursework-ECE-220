@@ -99,58 +99,64 @@ GET_NEXT
 
 PRINT_HIST
 
-; you will need to insert your code to print the histogram here
-
-; do not forget to write a brief description of the approach/algorithm
-; for your implementation, list registers used in this part of the code,
+; In this program i put a loop that prints out the first character and then
+; Prints out space and finally prints the hexadecimal number which is the count for the particular character in the histogram 
+;Finally I print out a newline and end the loop. The loop runs 27 times for each letter and once for special characters
+;To print the hexadecimal number, I use another register to transfer the first four digits of the count by adding one to the register if the leading
+;bit in the count is 1 and then left shifting both registers. I convert these digits to its ascii value and then print it out on the screen.
+; R1-> Stores count of first histogram character
+;R6-> Stores 27 Count for printing all characters
+;R3-> Stores 4 count for 4 digits to be transferred
+;R5-> Stores 4 count for 4 sets of 4 digit numbers in each hexadecimal number
+;R2-> Stores first four digits of value and gets converted to the ascii value of the digit
 ; and provide sufficient comments
-		LD R6,NUM_BINS
-PRINT_CONT		LD R0,CHAR
+		LD R6,NUM_BINS				;Load R6 with 27
+PRINT_CONT		LD R0,CHAR          ;Print out the character whose count is to be displayed
 		TRAP x21
 		LD R0,SPACE
 		TRAP x21
 		LD R0,CHAR
 		ADD R0,R0,#1
 		ST R0,CHAR		
-		LDI R1,HIST_ADDR
+		LDI R1,HIST_ADDR			;Stores Value of count of first character
 		AND R2,R2,#0
 		AND R3,R3,#0
-		ADD R3,R3,#4
+		ADD R3,R3,#4				;Load R3 with 4 as each 4 digits represent 1 number
 		AND R5,R5,#0
-		ADD R5,R5,#4		
-LOOP            ADD R1,R1,#0
+		ADD R5,R5,#4				;Load R5 with 4 as there are 4 sets of 4 digit number
+LOOP            ADD R1,R1,#0		;Check first digit of R1 by the logic that if the leading bit is one the number stored is negative
 		BRzp #1
-		ADD R2,R2,#1
-		ADD R1,R1,R1
+		ADD R2,R2,#1				;ADD 1 to R2 if R1 has leading bit as 1
+		ADD R1,R1,R1				;Left Shift R1
 		ADD R3,R3,#-1
 		BRnz #2
-		ADD R2,R2,R2
+		ADD R2,R2,R2				;LEFT SHIFT R2
 		BRnzp LOOP
-		ADD R3,R2,#-9
+		ADD R3,R2,#-9				;Check if R2 is less than 9
 		BRnz #3
-		LD R4,AASCII
+		LD R4,AASCII				;ADD 'A' AND SUBTRACT 10 TO FIND ASCII CODE IF R2>9
 		ADD R2,R2,#-10
 		ADD R2,R2,R4
 		ADD R3,R3,#0
 		BRp #2
-		LD R4,ZERO
+		LD R4,ZERO					;ADD '0' IF R2 IS LESS THAN 9 TO GET THE ASCII CODE
 		ADD R2,R2,R4
 		ADD R0,R2,#0
-		OUT
+		OUT							;PRINT ASCII CODE
 		AND R2,R2,#0
 		AND R3,R3,#0
 		ADD R3,R3,#4
 		ADD R5,R5,#-1
-		BRp LOOP
+		BRp LOOP					;LOOP IF ALL 4 SETS OF DIGITS ARE NOT PRINTED YET
 		LD R1,HIST_ADDR
-		ADD R1,R1,#1
-		ST R1,HIST_ADDR
+		ADD R1,R1,#1		
+		ST R1,HIST_ADDR				;Change address in hist_addr to point to count of next letter
 		LD R0,NEW_LINE
-		TRAP x21
-		ADD R6,R6,#-1
-		BRp PRINT_CONT
+		TRAP x21					;Print out new line
+		ADD R6,R6,#-1				;Decrement Counter 
+		BRp PRINT_CONT				;LOOP if all 27 lines are not printed yet
 
-DONE	HALT			; done
+DONE	HALT						; done
 
 
 ; the data needed by the program
@@ -160,11 +166,11 @@ AT_MIN_Z	.FILL xFFE6	; the difference between ASCII '@' and 'Z'
 AT_MIN_BQ	.FILL xFFE0	; the difference between ASCII '@' and '`'
 HIST_ADDR	.FILL x3F00     ; histogram starting address
 STR_START	.FILL x4000	; string starting address
-AASCII  	.FILL x0041
-CHAR        .FILL x0040
-SPACE       .FILL x0020
-ZERO        .FILL x0030
-NEW_LINE    .FILL x000A
+AASCII  	.FILL x0041 ;Value of 'A'
+CHAR        .FILL x0040 ;Value of @
+SPACE       .FILL x0020 ;Value of Space
+ZERO        .FILL x0030 ;Value of 0
+NEW_LINE    .FILL x000A ;Value of Newline
 
 ; for testing, you can use the lines below to include the string in this
 ; program...
