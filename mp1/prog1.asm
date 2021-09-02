@@ -93,6 +93,7 @@ MORE_THAN_Z
 GET_NEXT
 	ADD R1,R1,#1		; point to next character in string
 	BRnzp COUNTLOOP		; go to start of counting loop
+	
 
 
 
@@ -103,8 +104,51 @@ PRINT_HIST
 ; do not forget to write a brief description of the approach/algorithm
 ; for your implementation, list registers used in this part of the code,
 ; and provide sufficient comments
-
-
+		LD R6,NUM_BINS
+PRINT_CONT		LD R0,CHAR
+		TRAP x21
+		LD R0,SPACE
+		TRAP x21
+		LD R0,CHAR
+		ADD R0,R0,#1
+		ST R0,CHAR		
+		LDI R1,HIST_ADDR
+		AND R2,R2,#0
+		AND R3,R3,#0
+		ADD R3,R3,#4
+		AND R5,R5,#0
+		ADD R5,R5,#4		
+LOOP            ADD R1,R1,#0
+		BRzp #1
+		ADD R2,R2,#1
+		ADD R1,R1,R1
+		ADD R3,R3,#-1
+		BRnz #2
+		ADD R2,R2,R2
+		BRnzp LOOP
+		ADD R3,R2,#-9
+		BRnz #3
+		LD R4,AASCII
+		ADD R2,R2,#-10
+		ADD R2,R2,R4
+		ADD R3,R3,#0
+		BRp #2
+		LD R4,ZERO
+		ADD R2,R2,R4
+		ADD R0,R2,#0
+		OUT
+		AND R2,R2,#0
+		AND R3,R3,#0
+		ADD R3,R3,#4
+		ADD R5,R5,#-1
+		BRp LOOP
+		LD R1,HIST_ADDR
+		ADD R1,R1,#1
+		ST R1,HIST_ADDR
+		LD R0,NEW_LINE
+		TRAP x21
+		ADD R6,R6,#-1
+		BRp PRINT_CONT
 
 DONE	HALT			; done
 
@@ -116,11 +160,17 @@ AT_MIN_Z	.FILL xFFE6	; the difference between ASCII '@' and 'Z'
 AT_MIN_BQ	.FILL xFFE0	; the difference between ASCII '@' and '`'
 HIST_ADDR	.FILL x3F00     ; histogram starting address
 STR_START	.FILL x4000	; string starting address
+AASCII  	.FILL x0041
+CHAR        .FILL x0040
+SPACE       .FILL x0020
+ZERO        .FILL x0030
+NEW_LINE    .FILL x000A
 
 ; for testing, you can use the lines below to include the string in this
 ; program...
-; STR_START	.FILL STRING	; string starting address
-; STRING		.STRINGZ "This is a test of the counting frequency code.  AbCd...WxYz."
+;STR_START	.FILL STRING	; string starting address
+;STRING		.STRINGZ "This is a test of the counting frequency code.  AbCd...WxYz."
+;STRING .STRINGZ "When I was young, I learned the sentence that people used to learn typing: \"The quick brown fox jumped over the lazy dog.\"  If you look carefully, or less than carefully at a correctly-produced histogram, you will notice that it contains all of the letters in the English language.  This aspect gives the sentence its value in teaching typing skills.  Can you type it, I wonder?"
 
 
 
