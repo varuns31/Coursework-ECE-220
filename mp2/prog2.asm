@@ -43,10 +43,11 @@ PRINT_HEX	ST R7, HEX_SAVER7	; callee save R7
 			ADD R1,R1,#4		;Load R1 with 4 as each 4 digits represent 1 number
 			AND R3,R3,#0
 			ADD R3,R3,#4		;Load R3 with 4 as there are 4 sets of 4 digit number
-LOOP        ADD R5,R5,#0		;Check first digit of R1 by the logic that if the leading bit is one the number stored is negative
+			ADD R6,R5,#0
+LOOP        ADD R6,R6,#0		;Check first digit of R1 by the logic that if the leading bit is one the number stored is negative
 			BRzp #1
 			ADD R2,R2,#1		;ADD 1 to R2 if R5 has leading bit as 1
-			ADD R5,R5,R5		;Left Shift R5
+			ADD R6,R6,R6		;Left Shift R5
 			ADD R1,R1,#-1
 			BRnz #2
 			ADD R2,R2,R2		;LEFT SHIFT R2
