@@ -1,0 +1,25 @@
+Compilation Results:
+********************
+prog5.c: In function ‘set_seed’:
+prog5.c:93:1: error: control reaches end of non-void function [-Werror=return-type]
+ }
+ ^
+prog5.c: In function ‘make_guess’:
+prog5.c:134:1: error: control reaches end of non-void function [-Werror=return-type]
+ }
+ ^
+cc1: all warnings being treated as errors
+prog5.c: In function ‘set_seed’:
+prog5.c:93:1: error: control reaches end of non-void function [-Werror=return-type]
+ }
+ ^
+prog5.c: In function ‘make_guess’:
+prog5.c:134:1: error: control reaches end of non-void function [-Werror=return-type]
+ }
+ ^
+cc1: all warnings being treated as errors
+This nightly test is focusing on compilation error not functionality test.
+This nightly report only tests on the released testcases.
+There are many hidden edge testcase for the MP. Please test it yourselve.
+HIGHLY RECOMMEND YOU TO START YOUR MP EARLY!!!!!!!
+Timestamp: 2021-10-06_16:36:25
