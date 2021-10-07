@@ -1,25 +1,37 @@
 Compilation Results:
 ********************
-prog5.c: In function ‘set_seed’:
-prog5.c:93:1: error: control reaches end of non-void function [-Werror=return-type]
- }
- ^
-prog5.c: In function ‘make_guess’:
-prog5.c:134:1: error: control reaches end of non-void function [-Werror=return-type]
- }
- ^
-cc1: all warnings being treated as errors
-prog5.c: In function ‘set_seed’:
-prog5.c:93:1: error: control reaches end of non-void function [-Werror=return-type]
- }
- ^
-prog5.c: In function ‘make_guess’:
-prog5.c:134:1: error: control reaches end of non-void function [-Werror=return-type]
- }
- ^
-cc1: all warnings being treated as errors
+
+*****Testing set_seed:
+set_seed: invalid seed
+*****set_seed return value: PASS
+*****set_seed call srand: PASS
+*****Testing start_game:
+*****start_game initialization: PASS
+*****start_game output: PASS
+*****Testing make_guess output:
+make_guess: invalid guess
+*****make_guess return value: PASS
+With guess 1, you got 2 perfect matches and 1 misplaced matches.
+Your score is 2100 and current max score is 2100.
+*****make_guess test1-1: PASS
+With guess 2, you got 4 perfect matches and 0 misplaced matches.
+Your score is 4000 and current max score is 4000.
+*****make_guess test1-2: PASS
+make_guess: invalid guess
+*****make_guess test2-1: PASS
+With guess 1, you got 0 perfect matches and 4 misplaced matches.
+Your score is 400 and current max score is 400.
+*****make_guess test2-2: PASS
+With guess 2, you got 2 perfect matches and 0 misplaced matches.
+Your score is 2000 and current max score is 2000.
+*****make_guess test3-1: PASS
+With guess 3, you got 4 perfect matches and 0 misplaced matches.
+Your score is 4000 and current max score is 4000.
+*****make_guess test3-2: PASS
+Testing three output files
+Pass the nightly test!!!
 This nightly test is focusing on compilation error not functionality test.
 This nightly report only tests on the released testcases.
 There are many hidden edge testcase for the MP. Please test it yourselve.
 HIGHLY RECOMMEND YOU TO START YOUR MP EARLY!!!!!!!
-Timestamp: 2021-10-07_00:33:59
+Timestamp: 2021-10-07_12:19:38
