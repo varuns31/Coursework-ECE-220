@@ -30,28 +30,28 @@ int countLiveNeighbor(int* board, int boardRowSize, int boardColSize, int row, i
 	for(int i = row-1; i <= row+1; i++)
     {
         //check if the row is within the bounds of the board
-		if(i >= 0 && i < boardRowSize)
+        if(i >= 0 && i < boardRowSize)
         {
             //columns from currCol-1 to currCol+1, inclusive
-			for(int j = col-1; j <= col+1; j++)
+            for(int j = col-1; j <= col+1; j++)
             {
                 //Check if the column is within the bounds of the board
-				if( j >= 0 && j < boardColSize)
+                if( j >= 0 && j < boardColSize)
                 {
                     //Check  if the cell isn't at (currRow, currCol)
-					if(!(i == row && j == col))
+                    if(!(i == row && j == col))
                     {
-                        //Check if the cell is alive
-						if(board[i*boardColSize+j] == 1)
+                    //Check if the cell is alive
+                        if(board[i*boardColSize+j] == 1)
                         {
-                            //increment the number of live neighbors
-							count++;
-						}
-					}
-				}
-			}
-		}
-	}
+                        //increment the number of live neighbors
+                            count++;
+                        }
+                    }
+                }
+            }
+        }
+    }
      //return the number of live neighbors
 	return count;  
 }
